@@ -1,9 +1,12 @@
 # %%
+import pandas as pd
+
+# %%
 class RDSDatabaseConnector:
     '''
     This class extracts data from the RDS database.
 
-    Attributes;
+    Attributes:
 
     '''
 
@@ -13,7 +16,7 @@ class RDSDatabaseConnector:
         '''
         self.credentials = credentials
     
-    def load_credentials(self, yaml_file):
+    def load_credentials(self):
         '''
         This function is used to load the credentials.yaml file.
 
@@ -25,9 +28,10 @@ class RDSDatabaseConnector:
         '''
         import yaml
 
-        with open(yaml_file, 'r') as f:
-            credentials = yaml.safe_load(f)
-        return credentials
+        with open(self.credentials, 'r') as f:
+            load_credentials = yaml.safe_load(f)
+
+        self.credentials = load_credentials
     
     def initialise_SQLAlchemy(self):
         '''
@@ -37,10 +41,11 @@ class RDSDatabaseConnector:
 
         '''
         from sqlalchemy import create_engine
-        import pandas as pd
 
-        engine = create_engine((f"{'postgresql'}+{'psycopg2'}://{credentials['RDS_USER']}:{credentials['RDS_PASSWORD']}@{credentials['RDS_HOST']}:{credentials['RDS_PORT']}/{credentials['RDS_DATABASE']}"))
+        engine = create_engine((f"{'postgresql'}+{'psycopg2'}://{self.credentials['RDS_USER']}:{self.credentials['RDS_PASSWORD']}@{self.credentials['RDS_HOST']}:{self.credentials['RDS_PORT']}/{self.credentials['RDS_DATABASE']}"))
         engine.execution_options(isolation_level='AUTOCOMMIT').connect()
+
+        return engine
     
     def data_to_Pandas_df(self):
         '''
@@ -49,33 +54,27 @@ class RDSDatabaseConnector:
         Returns:
 
         '''
-        loan_payment = pd.read_sql_table('loan_payments', engine)
-        return loan_payment.head(10)
-    
-    def df_to_csv(self, pandas_df):
+        pandas_df = pd.read_sql_table('loan_payments', engine)
+        return pandas_df
+    def df_to_csv(self):
         '''
         This function converts as Pandas DataFrame to a csv file, which is saved to your local machine.
 
         Returns:
 
         '''
-        pandas_df.to_csv('loan_payment', index=False)
-
+        csv_file = pandas_df.to_csv('loan_payment', index=False)
+        return csv_file
 # %%
-# Trial loading yaml file
-import yaml
-# had a few issues installing yaml locally but sorted now
-# python3.11 -m pip install pyyaml
-
-with open('credentials.yaml', 'r') as f:
-    credentials = yaml.safe_load(f)
-credentials
-# It worked!
+#if __name__ == 'main':
+new_rds = RDSDatabaseConnector('credentials.yaml')
+new_rds
 # %%
-credentials['RDS_DATABASE']
+new_rds.load_credentials()
 # %%
-# Trial sqlalchemy engine
-from sqlalchemy import create_engine
-import pandas as pd
-engine = create_engine(f"{'postgresql'}+{'psycopg2'}://{credentials['RDS_USER']}:{credentials['RDS_PASSWORD']}@{credentials['RDS_HOST']}:{credentials['RDS_PORT']}/{credentials['RDS_DATABASE']}")
+new_rds.initialise_SQLAlchemy()
+# %%
+new_rds.data_to_Pandas_df()
+# %%
+new_rds.df_to_csv()
 # %%
