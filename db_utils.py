@@ -31,7 +31,7 @@ class RDSDatabaseConnector:
     
     def initialise_SQLAlchemy(self):
         '''
-        This function initialises a SQLAlchemy engine from the 'dictionary_credentials'.
+        This function initialises a SQLAlchemy engine from the 'credentials'.
 
         Returns:
 
@@ -40,7 +40,17 @@ class RDSDatabaseConnector:
         import pandas as pd
 
         engine = create_engine((f"{'postgresql'}+{'psycopg2'}://{credentials['RDS_USER']}:{credentials['RDS_PASSWORD']}@{credentials['RDS_HOST']}:{credentials['RDS_PORT']}/{credentials['RDS_DATABASE']}"))
-        return engine
+        engine.execution_options(isolation_level='AUTOCOMMIT').connect()
+    
+    def data_to_Pandas_df(self):
+        '''
+        This function extracts data from the RDS database and returns it as a Pandas DataFrame.
+
+        Returns:
+
+        '''
+        loan_payment = pd.read_sql_table('loan_payments', engine)
+        return loan_payment.head(10)
 # %%
 # Trial loading yaml file
 import yaml
