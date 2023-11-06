@@ -51,6 +51,16 @@ class RDSDatabaseConnector:
         '''
         loan_payment = pd.read_sql_table('loan_payments', engine)
         return loan_payment.head(10)
+    
+    def df_to_csv(self, pandas_df):
+        '''
+        This function converts as Pandas DataFrame to a csv file, which is saved to your local machine.
+
+        Returns:
+
+        '''
+        pandas_df.to_csv('loan_payment', index=False)
+
 # %%
 # Trial loading yaml file
 import yaml
