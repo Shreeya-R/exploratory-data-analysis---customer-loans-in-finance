@@ -54,7 +54,7 @@ class RDSDatabaseConnector:
         Returns:
 
         '''
-        pandas_df = pd.read_sql_table('loan_payments', engine)
+        pandas_df = pd.read_sql_table('loan_payments', self.initialise_SQLAlchemy())
         return pandas_df
     def df_to_csv(self):
         '''
@@ -63,18 +63,18 @@ class RDSDatabaseConnector:
         Returns:
 
         '''
-        csv_file = pandas_df.to_csv('loan_payment', index=False)
+        csv_file = self.data_to_Pandas_df().to_csv('loan_payment', index=False)
         return csv_file
 # %%
 #if __name__ == 'main':
 new_rds = RDSDatabaseConnector('credentials.yaml')
 new_rds
 # %%
-new_rds.load_credentials()
+# new_rds.load_credentials()
 # %%
-new_rds.initialise_SQLAlchemy()
+# new_rds.initialise_SQLAlchemy()
 # %%
-new_rds.data_to_Pandas_df()
+# new_rds.data_to_Pandas_df()
 # %%
-new_rds.df_to_csv()
+# new_rds.df_to_csv()
 # %%
