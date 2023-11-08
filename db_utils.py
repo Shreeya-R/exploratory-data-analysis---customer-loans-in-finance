@@ -7,6 +7,7 @@ class RDSDatabaseConnector:
     This class extracts data from the RDS database.
 
     Attributes:
+        credentials (dict): these are the credentials of the sqlalchemy engine represented as a dictionary.
 
     '''
 
@@ -21,7 +22,7 @@ class RDSDatabaseConnector:
         This function is used to load the credentials.yaml file.
 
         Args:
-            yaml_file (yaml): a yaml file to be loaded through this function.
+            
 
         Returns:
             dict: the dictionary representation of the credentials.
@@ -38,7 +39,7 @@ class RDSDatabaseConnector:
         This function initialises a SQLAlchemy engine from the 'credentials'.
 
         Returns:
-
+            engine (sqlalchemy engine): an sqlalchemy engine is created and connected.
         '''
         from sqlalchemy import create_engine
 
@@ -52,7 +53,7 @@ class RDSDatabaseConnector:
         This function extracts data from the RDS database and returns it as a Pandas DataFrame.
 
         Returns:
-
+            pandas_df (pandas dataframe): the data is represented as a pandas dataframe.
         '''
         pandas_df = pd.read_sql_table('loan_payments', self.initialise_SQLAlchemy())
         return pandas_df
@@ -61,7 +62,7 @@ class RDSDatabaseConnector:
         This function converts as Pandas DataFrame to a csv file, which is saved to your local machine.
 
         Returns:
-
+            csv_file (csv): data is represented as a csv file.
         '''
         csv_file = self.data_to_Pandas_df().to_csv('loan_payment', index=False)
         return csv_file
