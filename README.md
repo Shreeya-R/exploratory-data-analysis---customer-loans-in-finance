@@ -15,7 +15,8 @@ Very short description here.
 ### What I've Learned
 
 ## 2. Installation Instructions
-- import yaml, pandas etc if not included in code of the class
+- import yaml, 
+- import pandas etc if not included in code of the class
 - import db_utils.py 
 
 ## 3. Usage Instructions
@@ -32,3 +33,6 @@ Go through class RDSDatabaseConnector & go through each method.
 - familiarise_with_data.py
     - Loads loan_payment csv
     - Looks at familiarises self with data
+
+## UNFINISHED CODE
+- doc strings for RDSDatabaseConnector class in db_utils.py
