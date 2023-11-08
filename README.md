@@ -23,3 +23,12 @@ Go through class RDSDatabaseConnector & go through each method.
 - load_credentials (loads the credentials.yaml file to give the dictionary for credentials)
 - initialise_SQLAlchemy (initialises the SQLAlchemy engine)
 - 
+
+## 4. File Structure of the Project
+- db_utils.py 
+    - This connects to the RDS
+    - Converts data to pandas dataframe
+    - Converts pandas dataframe to csv
+- familiarise_with_data.py
+    - Loads loan_payment csv
+    - Looks at familiarises self with data
