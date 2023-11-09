@@ -33,6 +33,9 @@ Go through class RDSDatabaseConnector & go through each method.
 - familiarise_with_data.py
     - Loads loan_payment csv
     - Looks at familiarises self with data
+- DataTransform_class.py
+    - Converts columns to correct data format
+    - Contains the class DataTransform, and corresponding methods
 
 ## UNFINISHED CODE
 - doc strings for RDSDatabaseConnector class in db_utils.py
