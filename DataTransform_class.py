@@ -19,7 +19,7 @@ class DataTransform:
         This function converts object data types to datetime64 data types.
 
         Returns:
-
+            datatype (datetime): specified columns are now datetime datatypes.
         '''
         self.data['issue_date'] = pd.to_datetime(self.data['issue_date'])
         self.data['earliest_credit_line'] = pd.to_datetime(self.data['earliest_credit_line'])
@@ -32,32 +32,46 @@ class DataTransform:
         This function converts object data types to boolean data types.
 
         Returns:
-
+            datatype (boolean): specified columns are now boolean datatypes.
         '''
-        self.data['payment_plan', 'policy_code'] = self.data['payment_plan', 'policy_code'].astype('bool')
+        self.data['payment_plan'] = self.data['payment_plan'].astype('bool')
 
     def object_to_category(self):
         '''
         This function converts object data types to category data types.
 
         Returns:
-
+            datatype (category): specified columns are now category datatypes.
         '''
-        self.data['home_ownership', 'verification_status', 'loan_status'] = self.data['home_ownership', 'verification_status', 'loan_status'].astype('category')
-
-    def object_to_timedelta(self):
+        self.data['home_ownership'] = self.data['home_ownership'].astype('category')
+        self.data['verification_status'] = self.data['verification_status'].astype('category')
+        self.data['loan_status'] = self.data['loan_status'].astype('category')
+        self.data['purpose'] = self.data['purpose'].astype('category')
+        
+    def object_to_integer(self):
         '''
-        This function converts object data types to timedelta64 data types.
+        This function converts object data types to integer data types.
 
         Returns:
-
+            datatype (int): specified columns are now integer datatypes.
         '''
-        self.data['issue_date','earliest_credit_line','last_payment_date','next_payment_date', 'last_credit_pull_date'] = self.data['issue_date','earliest_credit_line','last_payment_date','next_payment_date', 'last_credit_pull_date'].apply(pd.to_timedelta)
+        self.data['term'] = self.data['term'].apply(lambda x: 36 if x == '36 months' else 60)
+        
+        #self.data['employment_length'] = self.data['employment_length'].apply(lambda x: 5 if x == '5 years')
 
 # %%
 new_data = DataTransform(loan_data)
 # %%
 new_data.object_to_datetime()
 # %%
+new_data.object_to_boolean()
+
+# %%
+new_data.object_to_category()
+# %%
+new_data.object_to_integer()
+# %%
 new_data.data.dtypes
+# %%
+new_data.data['employment_length']
 # %%
