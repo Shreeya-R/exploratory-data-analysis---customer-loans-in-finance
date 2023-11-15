@@ -31,11 +31,16 @@ Go through class RDSDatabaseConnector & go through each method.
     - Converts data to pandas dataframe
     - Converts pandas dataframe to csv
 - familiarise_with_data.py
-    - Loads loan_payment csv
+    - Loads loan_payment 
     - Looks at familiarises self with data
 - DataTransform_class.py
     - Converts columns to correct data format
     - Contains the class DataTransform, and corresponding methods
+- DataFrameInfo.py
+    - Extracts information from the DataFrame and it's columns
+    - Contains methods to generate useful information about the DataFrame
 
 ## UNFINISHED CODE
 - doc strings for RDSDatabaseConnector class in db_utils.py
+- converting employment_length to numerical data type in the class DataTransform
+
