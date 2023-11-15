@@ -56,6 +56,11 @@ class DataTransform:
             datatype (int): specified columns are now integer datatypes.
         '''
         self.data['term'] = self.data['term'].apply(lambda x: 36 if x == '36 months' else 60)
+
+        self.data['employment_length'] = self.data['employment_length'].astype('string')
+        self.data['employment_length'] = self.data['employment_length'].str.replace('years', '')
+        self.data['employment_length'] = self.data['employment_length'].str.replace('year', '')
+        # self.data['employment_length'] = pd.to_numeric(self.data['employment_length'], errors='ignore')
         
         #self.data['employment_length'] = self.data['employment_length'].apply(lambda x: 5 if x == '5 years')
 
