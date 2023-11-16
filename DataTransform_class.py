@@ -65,6 +65,19 @@ class DataTransform:
         self.data['employment_length'] = pd.to_numeric(self.data['employment_length'])
         # Need to work out how to concise the above
 
+    def all_transformations(self):
+        '''
+        This function concises all of the above methods into one method.
+
+        Returns:
+            DataFrame: all necessary transformations have been applied to columns.
+        '''
+        self.object_to_boolean()
+        self.object_to_category()
+        self.object_to_datetime()
+        self.object_to_integer()
+
+        return self.data.head(10)
 # %%
 if __name__ == "__main__":
     new_data = DataTransform(loan_data)
