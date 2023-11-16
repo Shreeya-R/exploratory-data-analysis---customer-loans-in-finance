@@ -65,18 +65,15 @@ class DataTransform:
         #self.data['employment_length'] = self.data['employment_length'].apply(lambda x: 5 if x == '5 years')
 
 # %%
-new_data = DataTransform(loan_data)
-# %%
-new_data.object_to_datetime()
-# %%
-new_data.object_to_boolean()
+if __name__ == "__main__":
+    new_data = DataTransform(loan_data)
+    
+    new_data.object_to_datetime()
+    new_data.object_to_boolean()
+    new_data.object_to_category()
+    new_data.object_to_integer()
 
-# %%
-new_data.object_to_category()
-# %%
-new_data.object_to_integer()
-# %%
-new_data.data.dtypes
-# %%
-new_data.data['employment_length']
+    new_data.data.dtypes
+
+    new_data.data
 # %%
