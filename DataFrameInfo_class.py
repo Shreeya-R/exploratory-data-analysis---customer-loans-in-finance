@@ -105,18 +105,14 @@ class DataFrameInfo:
         null_values = self.data.isnull().sum()/len(self.data) 
         print(f"The percentage of NULL values is: \n{null_values}")
 # %%
-DataFrameInfo_data = DataFrameInfo(DataTranform_data.data)
-DataFrameInfo_data.extract_mean()
-# %%
-DataFrameInfo_data.extract_standard_dev()
-# %%
-DataFrameInfo_data.extract_median()
-# %%
-DataFrameInfo_data.all_statistical_measures()
-# %%
-DataFrameInfo_data.distinct_values()
-# %%
-DataFrameInfo_data.shape_of_df()
-# %%
-DataFrameInfo_data.percentage_of_NULL_values()
+if __name__ == "__main__":  
+    DataFrameInfo_data = DataFrameInfo(DataTranform_data.data)
+    
+    DataFrameInfo_data.extract_mean()
+    DataFrameInfo_data.extract_standard_dev()
+    DataFrameInfo_data.extract_median()
+    DataFrameInfo_data.all_statistical_measures()
+    DataFrameInfo_data.distinct_values()
+    DataFrameInfo_data.shape_of_df()
+    DataFrameInfo_data.percentage_of_NULL_values()
 # %%
