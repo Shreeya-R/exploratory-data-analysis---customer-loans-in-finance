@@ -15,7 +15,7 @@ Very short description here.
 ### What I've Learned
 
 ## 2. Installation Instructions
-- import yaml, 
+- import yaml
 - import pandas etc if not included in code of the class
 - import db_utils.py 
 
@@ -23,7 +23,6 @@ Very short description here.
 Go through class RDSDatabaseConnector & go through each method.
 - load_credentials (loads the credentials.yaml file to give the dictionary for credentials)
 - initialise_SQLAlchemy (initialises the SQLAlchemy engine)
-- 
 
 ## 4. File Structure of the Project
 - db_utils.py 
@@ -39,8 +38,10 @@ Go through class RDSDatabaseConnector & go through each method.
 - DataFrameInfo.py
     - Extracts information from the DataFrame and it's columns
     - Contains methods to generate useful information about the DataFrame
+- missing_values.py
+    - Deals with missing data values
+    - Creates 2 classes to deal with missing values
 
 ## UNFINISHED CODE
 - doc strings for RDSDatabaseConnector class in db_utils.py
-- converting employment_length to numerical data type in the class DataTransform
 
