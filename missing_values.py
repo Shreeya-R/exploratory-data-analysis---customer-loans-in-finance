@@ -1,6 +1,8 @@
 # %%
-# Load in data
 import pandas as pd
+import matplotlib.pyplot as plt 
+# %%
+# Load in data
 loan_data = pd.read_csv('loan_payment.csv')
 # %%
 # Transform datatype of columns
@@ -24,6 +26,10 @@ class Plotter:
         '''
         See help(Plotter) for accurate signature.
         '''
+        self.data = DataFrameTransform_data.data
+
+    def hist_to_check_normality(self):
+        self.data['funded_amount'].hist(bins=40)
 # %%
 class DataFrameTransform:
     '''
@@ -62,6 +68,15 @@ class DataFrameTransform:
 
         '''
         self.data.drop(columns = ['total_rec_late_fee', 'recoveries', 'collection_recovery_fee', 'collections_12_mths_ex_med'], inplace = True)
+
+    def impute_missing_values(self):
+        '''
+        This function imputes missing values to the remaining columns.
+
+        Returns:
+
+        '''
+        self.data['funded_amount'] = self.data['funded_amount'].fillna(self.data['funded_amount'].mean())
 # %%
 DataFrameTransform_data = DataFrameTransform()
 # %%
@@ -72,4 +87,18 @@ DataFrameTransform_data.drop_too_many_null()
 DataFrameTransform_data.drop_too_many_zeros()
 # %%
 DataFrameTransform_data.data
+# %%
+DataFrameInfo_data.all_statistical_measures()
+# %%
+DataFrameInfo_data.extract_median()
+# %%
+DataFrameTransform_data.impute_missing_values()
+# %%
+# Funded amount
+# median = 12,000
+# mean = 13,229
+# %%
+plots = Plotter()
+# %%
+plots.hist_to_check_normality()
 # %%
