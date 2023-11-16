@@ -98,6 +98,6 @@ print(loan_data['collection_recovery_fee'].astype('int64'))
 print(loan_data['collection_recovery_fee'].value_counts()[0])
 # %%
 print(loan_data['collections_12_mths_ex_med'].isna().sum())
-# print(loan_data['collections_12_mths_ex_med'].astype('int64'))
-# print(loan_data['collections_12_mths_ex_med'].value_counts()[0])
+print(loan_data['collections_12_mths_ex_med'].astype('int64', errors='ignore'))
+print(loan_data['collections_12_mths_ex_med'].value_counts()[0])
 # %%
