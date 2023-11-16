@@ -88,3 +88,16 @@ print(loan_data['employment_length'].nunique())
 print(loan_data['employment_length'].unique())
 print(loan_data['employment_length'].dtype)
 # %%
+print(loan_data['total_rec_late_fee'].astype('int64'))
+print(loan_data['total_rec_late_fee'].value_counts()[0])
+# %%
+print(loan_data['recoveries'].astype('int64'))
+print(loan_data['recoveries'].value_counts()[0])
+# %%
+print(loan_data['collection_recovery_fee'].astype('int64'))
+print(loan_data['collection_recovery_fee'].value_counts()[0])
+# %%
+print(loan_data['collections_12_mths_ex_med'].isna().sum())
+# print(loan_data['collections_12_mths_ex_med'].astype('int64'))
+# print(loan_data['collections_12_mths_ex_med'].value_counts()[0])
+# %%
