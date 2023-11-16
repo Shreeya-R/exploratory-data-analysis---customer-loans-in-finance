@@ -60,9 +60,10 @@ class DataTransform:
         self.data['employment_length'] = self.data['employment_length'].astype('string')
         self.data['employment_length'] = self.data['employment_length'].str.replace('years', '')
         self.data['employment_length'] = self.data['employment_length'].str.replace('year', '')
-        # self.data['employment_length'] = pd.to_numeric(self.data['employment_length'], errors='ignore')
-        
-        #self.data['employment_length'] = self.data['employment_length'].apply(lambda x: 5 if x == '5 years')
+        self.data['employment_length'] = self.data['employment_length'].str.replace('10+', '10')
+        self.data['employment_length'] = self.data['employment_length'].str.replace('< 1', '1')
+        self.data['employment_length'] = pd.to_numeric(self.data['employment_length'])
+        # Need to work out how to concise the above
 
 # %%
 if __name__ == "__main__":
