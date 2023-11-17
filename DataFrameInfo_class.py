@@ -11,8 +11,6 @@ from DataTransform_class import DataTransform
 DataTranform_data = DataTransform(loan_data)
 DataTranform_data.all_transformations()
 # %%
-DataTranform_data.data.info()
-# %%
 class DataFrameInfo:
     '''
     This class extracts information from the DataFrame and it's columns.
@@ -23,7 +21,7 @@ class DataFrameInfo:
         '''
         self.data = data
 
-    def mean_single_column(self):
+    def mean_of_variable(self):
         '''
         This function calculates the mean of a single column.
 
@@ -34,10 +32,10 @@ class DataFrameInfo:
         single_column = input("Please enter the column you wish to calculate the mean of here: ")
         single_column_mean = self.data[single_column].mean()
 
-        print(f"Mean of {single_column} is {single_column_mean}.\n")
+        print(f"Mean of {single_column} is: {single_column_mean}\n")
         print(f"Data for {single_column} is: \n{self.data[single_column]}")
 
-    def median_single_column(self):
+    def median_of_variable(self):
         '''
         This function calculates the median of a single column.
 
@@ -48,10 +46,10 @@ class DataFrameInfo:
         single_column = input("Please enter the column you wish to calculate the median of here: ")
         single_column_median = self.data[single_column].median()
 
-        print(f"Median of {single_column} is {single_column_median}.\n")
+        print(f"Median of {single_column} is: {single_column_median}\n")
         print(f"Data for {single_column} is: \n{self.data[single_column]}")
     
-    def mode_single_column(self):
+    def mode_of_variable(self):
         '''
         This function calculates the mode of a single column.
 
@@ -59,11 +57,45 @@ class DataFrameInfo:
             mode (string): a string description of the mode for the chosen single column.
             data (column): all the data contained in the chosen single column.
         '''
-        single_column = input("Please enter the column you wish to calculate the median of here: ")
+        single_column = input("Please enter the column you wish to calculate the mode of here: ")
         single_column_mode = self.data[single_column].mode()
 
-        print(f"Mode of {single_column} is {single_column_mode}\n")
+        print(f"Mode of {single_column} is: {single_column_mode}\n")
         print(f"Data for {single_column} is: \n{self.data[single_column]}")
+
+    def std_dev_of_variable(self):
+        '''
+        This function calculates the standard deviation of a single column.
+
+        Returns:
+            standard deviation (string): a string description of the standard deviation for the chosen single column.
+            data (column): all the data contained in the chosen single column.
+        '''
+        single_column = input("Please enter the column you wish to calculate the standard deviation of here: ")
+        single_column_std_dev = self.data[single_column].std()
+
+        print(f"Standard deviation of {single_column} is: {single_column_std_dev}\n")
+        print(f"Data for {single_column} is: \n{self.data[single_column]}")
+
+    def skew_of_variable(self):
+        '''
+        This function calculates the skew of a single column.
+
+        Returns:
+            skew (string): a string description of the skew for the chosen single column.
+            data (column): all the data contained in the chosen single column.
+        '''
+        single_column = input("Please enter the column you wish to calculate the skew of here: ")
+        single_column_skew = self.data[single_column].skew()
+
+        print(f"Skew of {single_column} is: {single_column_skew}\n")
+        
+        if single_column_skew > 1:
+            print('This indicates a strong positive (right) skew.')
+        elif single_column_skew < -1:
+            print('This indicates a strong negative (left) skew.')
+        else:
+            print('This indicates that the data is normal or close to normal in distribution.')
 
     def all_statistical_measures(self):
         '''
@@ -124,4 +156,11 @@ if __name__ == "__main__":
     #DataFrameInfo_data.mean_single_column()
     #DataFrameInfo_data.median_single_column()
     #DataFrameInfo_data.mode_single_column()
+# %%
+if __name__ == "__main__": 
+    cleaned_missing_value_data = pd.read_csv('cleaned_data.csv')
+
+    cleaned_data = DataFrameInfo(cleaned_missing_value_data)
+    cleaned_data.std_dev_of_variable()
+    cleaned_data.skew_of_variable()
 # %%
