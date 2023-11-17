@@ -23,19 +23,47 @@ class DataFrameInfo:
         '''
         self.data = data
 
-    def extract_mean(self):
+    def mean_single_column(self):
+        '''
+        This function calculates the mean of a single column.
+
+        Returns:
+            mean (string): a string description of the mean for the chosen single column.
+            data (column): all the data contained in the chosen single column.
+        '''
+        single_column = input("Please enter the column you wish to calculate the mean of here: ")
+        single_column_mean = self.data[single_column].mean()
+
+        print(f"Mean of {single_column} is {single_column_mean}.\n")
+        print(f"Data for {single_column} is: \n{self.data[single_column]}")
+
+    def median_single_column(self):
+        '''
+        This function calculates the median of a single column.
+
+        Returns:
+            median (string): a string description of the median for the chosen single column.
+            data (column): all the data contained in the chosen single column.
+        '''
+        single_column = input("Please enter the column you wish to calculate the median of here: ")
+        single_column_median = self.data[single_column].median()
+
+        print(f"Median of {single_column} is {single_column_median}.\n")
+        print(f"Data for {single_column} is: \n{self.data[single_column]}")
+
+    def extract_mean_all(self):
         '''
         This function calculates the mean of numerical columns.
 
         Returns:
-            mean: the mean of each numerical column
+            means (column): the mean of each numerical column
         '''
         int64_means = self.data.select_dtypes('int64').mean()
         float64_means = self.data.select_dtypes('float64').mean()
 
         print(f"Mean values of all numerical columns are:\n \n{int64_means}\n{float64_means}")
 
-    def extract_standard_dev(self):
+    def extract_standard_dev_all(self):
         '''
         This function calculates the standard deviation of the numerical columns.
         
@@ -47,7 +75,7 @@ class DataFrameInfo:
         
         print(f"Standard deviation values of all numerical columns are:\n \n{int64_standard_dev}\n{float64_standard_dev}")
     
-    def extract_median(self):
+    def extract_median_all(self):
         '''
         This function calculates the median of the numerical columns.
 
@@ -108,11 +136,13 @@ class DataFrameInfo:
 if __name__ == "__main__":  
     DataFrameInfo_data = DataFrameInfo(DataTranform_data.data)
     
-    DataFrameInfo_data.extract_mean()
-    DataFrameInfo_data.extract_standard_dev()
-    DataFrameInfo_data.extract_median()
-    DataFrameInfo_data.all_statistical_measures()
-    DataFrameInfo_data.distinct_values()
-    DataFrameInfo_data.shape_of_df()
-    DataFrameInfo_data.percentage_of_NULL_values()
+    #DataFrameInfo_data.extract_mean_all()
+    #DataFrameInfo_data.extract_standard_dev_all()
+    #DataFrameInfo_data.extract_median_all()
+    #DataFrameInfo_data.all_statistical_measures()
+    #DataFrameInfo_data.distinct_values()
+    #DataFrameInfo_data.shape_of_df()
+    #DataFrameInfo_data.percentage_of_NULL_values()
+    #DataFrameInfo_data.mean_single_column()
+    #DataFrameInfo_data.median_single_column()
 # %%
