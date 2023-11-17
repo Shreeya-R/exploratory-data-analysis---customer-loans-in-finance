@@ -101,3 +101,7 @@ print(loan_data['collections_12_mths_ex_med'].isna().sum())
 print(loan_data['collections_12_mths_ex_med'].astype('int64', errors='ignore'))
 print(loan_data['collections_12_mths_ex_med'].value_counts()[0])
 # %%
+print(loan_data['employment_length'].unique())
+print(loan_data['employment_length'].nunique())
+print(loan_data['employment_length'].isnull().sum())
+# %%
