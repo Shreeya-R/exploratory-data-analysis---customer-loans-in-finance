@@ -41,6 +41,9 @@ Go through class RDSDatabaseConnector & go through each method.
 - missing_values.py
     - Deals with missing data values
     - Creates 2 classes to deal with missing values
+    - impute mean when data is numeric & not skewed
+    - impute median when data is numeric & skewed
+    - impute mode when data i sstring(object) or numeric
 
 ## UNFINISHED CODE
 - doc strings for RDSDatabaseConnector class in db_utils.py
