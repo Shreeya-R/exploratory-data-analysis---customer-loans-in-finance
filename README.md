@@ -13,6 +13,16 @@ Very short description here.
 - Aim & purpose of this project
 - A rough outline of the class RDSDatabaseConnector
 ### What I've Learned
+1. How to filter columns with missing values
+- Median as missing value: when variable is numerical & skewed
+- Mean as missing value: when variable is numerical & not skewed
+- Mode as missing value: when variable is numerical or categorical?
+2. Practically applying the knowledge
+- funded_amount: impute the median for missing values due to histogram & qqplot indicating skewness to the right.
+- int_rate: impute the median for missing values due to histogram & qqplot indicating skewness to the right.
+- employment_length: impute the median/mode due to skewness & the distribution not being close to that of a normal one
+- last_payment_date: remove missing value rows due to it not being normally distributed & percentage of missing data being very low (0.1346%)
+- last_credit_pull_date: remove missing value rows due to it not being close to a normal distribution & percentage of missing data being extremely low (0.0129%)
 
 ## 2. Installation Instructions
 - import yaml
