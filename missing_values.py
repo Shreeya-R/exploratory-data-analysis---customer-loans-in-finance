@@ -1,6 +1,7 @@
 # %%
 import pandas as pd
-import matplotlib.pyplot as plt 
+from matplotlib import pyplot 
+from statsmodels.graphics.gofplots import qqplot
 # %%
 # Load in data
 loan_data = pd.read_csv('loan_payment.csv')
@@ -29,7 +30,25 @@ class Plotter:
         self.data = DataFrameTransform_data.data
 
     def hist_to_check_normality(self):
-        self.data['funded_amount'].hist(bins=40)
+        '''
+        This function creates a histogram to check the normality of a variable.
+
+        Returns:
+            histogram: a single histogram plot of the variable required.
+        '''
+        hist_column = input("Please enter the variable here: ")
+        self.data.hist(column = hist_column)
+
+    def qqplot_to_check_normality(self):
+        '''
+        This function creates a Q-Q plot to check if teh variable follows a normal distribution.
+
+        Returns:
+            Q-Q plot:
+        '''
+        qqplot_column = input("Please enter the variable here: ")
+        qq_plot = qqplot(self.data[qqplot_column], line = '45')
+        pyplot.show()
 # %%
 class DataFrameTransform:
     '''
@@ -69,14 +88,29 @@ class DataFrameTransform:
         '''
         self.data.drop(columns = ['total_rec_late_fee', 'recoveries', 'collection_recovery_fee', 'collections_12_mths_ex_med'], inplace = True)
 
-    def impute_missing_values(self):
+    def mean_for_missing_values(self):
         '''
-        This function imputes missing values to the remaining columns.
+        This function imputes the mean in place of missing values.
+
+        Use this function when the variable is numeric and the histogram is not skewed.
 
         Returns:
 
         '''
-        self.data['funded_amount'] = self.data['funded_amount'].fillna(self.data['funded_amount'].mean())
+        variable_name = input("Please enter the variable whose missing values need to be imputed using the mean here: ")
+        self.data[variable_name] = self.data[variable_name].fillna(self.data[variable_name].mean())
+
+    def median_for_missing_values(self):
+        '''
+        This function imputes the median in place of missing values.
+
+        Use this function when the data is numeric and the histogram is skewed.
+
+        Returns:
+
+        '''
+        variable_name = input("Please enter the variable whose missing values need to be imputed using the mean here: ")
+        self.data[variable_name] = self.data[variable_name].fillna(self.data[variable_name].median())
 # %%
 DataFrameTransform_data = DataFrameTransform()
 # %%
@@ -88,17 +122,14 @@ DataFrameTransform_data.drop_too_many_zeros()
 # %%
 DataFrameTransform_data.data
 # %%
-DataFrameInfo_data.all_statistical_measures()
-# %%
-DataFrameInfo_data.extract_median()
-# %%
-DataFrameTransform_data.impute_missing_values()
-# %%
-# Funded amount
-# median = 12,000
-# mean = 13,229
-# %%
 plots = Plotter()
 # %%
+# Check if data is skewed before imputing values using histogram
 plots.hist_to_check_normality()
 # %%
+# Use q-q plot to identify the whether or not to impute mean, median or mode.
+plots.qqplot_to_check_normality()
+# %%
+DataFrameTransform_data.median_for_missing_values()
+# %%
+DataFrameTransform_data.mean_for_missing_values()
