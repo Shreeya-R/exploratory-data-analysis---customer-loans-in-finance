@@ -50,6 +50,20 @@ class DataFrameInfo:
 
         print(f"Median of {single_column} is {single_column_median}.\n")
         print(f"Data for {single_column} is: \n{self.data[single_column]}")
+    
+    def mode_single_column(self):
+        '''
+        This function calculates the mode of a single column.
+
+        Returns:
+            mode (string): a string description of the mode for the chosen single column.
+            data (column): all the data contained in the chosen single column.
+        '''
+        single_column = input("Please enter the column you wish to calculate the median of here: ")
+        single_column_mode = self.data[single_column].mode()
+
+        print(f"Mode of {single_column} is {single_column_mode}\n")
+        print(f"Data for {single_column} is: \n{self.data[single_column]}")
 
     def extract_mean_all(self):
         '''
@@ -145,4 +159,5 @@ if __name__ == "__main__":
     #DataFrameInfo_data.percentage_of_NULL_values()
     #DataFrameInfo_data.mean_single_column()
     #DataFrameInfo_data.median_single_column()
+    #DataFrameInfo_data.mode_single_column()
 # %%
