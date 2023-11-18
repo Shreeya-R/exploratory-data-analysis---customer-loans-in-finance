@@ -5,6 +5,7 @@ from statsmodels.graphics.gofplots import qqplot
 # %%
 import numpy as np
 import seaborn as sns
+import matplotlib.pyplot as plt
 # %%
 from scipy import stats
 from scipy.stats import yeojohnson
@@ -106,6 +107,17 @@ class Plotter:
         yeojohnson_variable = pd.Series(yeojohnson_variable[0])
         t = sns.histplot(yeojohnson_variable, label = "Skewness: %.2f"%(yeojohnson_variable.skew()))
         t.legend()
+    
+    def boxplot_for_outliers(self):
+        '''
+        This function creates a boxplot, which can then be used to identify the presence of outliers in the data.
+
+        Returns:
+            boxplot: a boxplot for a specific variable.
+        '''
+        plt.figure(figsize = (30,5))
+        self.data.boxplot()
+        plt.show()
 
 # %%
 class DataFrameTransform:
@@ -239,6 +251,34 @@ class DataFrameTransform:
 
         self.data[skewed_variable] = yeojohnson_variable
         return self.data[skewed_variable]
+    
+    def IQR_for_outliers(self):
+        '''
+        This function useds the inner quartile range (IQR) to decide the boundaries that outliers lie within and removes them from the specified variable.
+
+        Returns:
+            outliers (string): the outliers for the variable.
+        '''
+        variable = input("Please enter the variable you wish to remove outliers from here: ")
+
+        # Calculate lower and upper quartiles
+        Q1 = self.data[variable].quantile(0.25)
+        Q3 = self.data[variable]. quantile(0.75)
+
+        print(f"Q1 (25th Percentile): {Q1}")
+        print(f"Q3 (75th Percentile): {Q3}")
+
+        # Caluclate the IQR
+        IQR = Q3 - Q1
+
+        print(f"IQR (Inner Quartile Range): {IQR}")
+
+        # Identify outliers
+        lower_outliers = self.data[(self.data[variable] < (Q1 - 1.5*IQR))]
+        upper_outliers = self.data[(self.data[variable] > (Q3 + 1.5*IQR))]
+
+        print(f"Outliers:\n{lower_outliers[variable]}\n{upper_outliers[variable]}")
+        print(f"Unique values of the outliers:\n{lower_outliers[variable].unique()}\n{upper_outliers[variable].unique()}")
 
 # %%
 # Look at percentange of NULL values
@@ -339,3 +379,50 @@ normalised_data = data_to_be_normalised.data
 normalised_data.to_csv('normalised_data.csv', index = False)
 # %%
 loan_normalised = pd.read_csv('normalised_data.csv')
+# %%
+loan_normalised.drop(columns = ['id', 'member_id'], inplace=True)
+loan_normalised.head(10)
+# %%
+check_outliers = Plotter(loan_normalised)
+# %%
+check_outliers.boxplot_for_outliers()
+
+# Outliers
+# Can see outliers (indicated by circles) on:
+# loan_amount
+# funded_amount
+# funded_amount_inv
+# int_rate
+# instalment
+# annual_inc
+# dti
+# delinq_2yrs
+# open_accounts
+# total_accounts
+# total_payment
+# total_payment_inv
+# total_rec_prncp
+# total_rec_int
+# last_payment_amount
+# %%
+# Create instance for DataFrameTransform of normalised data
+transform_outliers = DataFrameTransform(loan_normalised)
+# %%
+transform_outliers.IQR_for_outliers()
+# %%
+# Keep or remove outliers for the variables:
+# loan_amount -> keep
+# funded_amount -> keep
+# funded_amount_inv -> keep
+# int_rate -> keep
+# instalment -> keep
+# annual_inc -> keep
+# dti -> remove due to there only being 60 & the values being a lot higher than the Q3
+# delinq_2yrs -> keep
+# open_accounts -> transform?
+# total_accounts -> transform?
+# total_payment -> transform?
+# total_payment_inv -> transform?
+# total_rec_prncp -> transform?
+# total_rec_int -> remove due to low number
+# last_payment_amount -> remove due to low number
