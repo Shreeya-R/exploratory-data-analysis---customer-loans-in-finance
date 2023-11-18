@@ -37,17 +37,17 @@ class Plotter:
         This function creates a histogram to check the normality of a variable.
 
         Returns:
-            histogram: a single histogram plot of the variable required.
+            histogram: a histogram plot of the chosen variable.
         '''
         hist_column = input("Please enter the variable here: ")
         self.data.hist(column = hist_column)
 
     def qqplot_to_check_normality(self):
         '''
-        This function creates a Q-Q plot to check if teh variable follows a normal distribution.
+        This function creates a Q-Q plot to check if the variable follows a normal distribution.
 
         Returns:
-            Q-Q plot:
+            Q-Q plot: a quartile-quartile plot for the chosen variable.
         '''
         qqplot_column = input("Please enter the variable here: ")
         qq_plot = qqplot(self.data[qqplot_column], line = 'q')
@@ -124,7 +124,7 @@ class DataFrameTransform:
         This function drops all the columns containing only a single value in them.
 
         Returns:
-
+            cleaned data: data with the necessary columns removed.
         '''
         self.data.drop(columns = ['policy_code', 'application_type'], inplace = True)
         return self.data
@@ -134,7 +134,7 @@ class DataFrameTransform:
         This function drops the variables that have over 50% null values.
 
         Returns:
-
+            cleaned data: data with the necessray columns removed.
         '''
         self.data.drop(columns = ['mths_since_last_record', 'mths_since_last_major_derog', 'mths_since_last_delinq', 'next_payment_date'], inplace = True)
         return self.data
@@ -144,7 +144,7 @@ class DataFrameTransform:
         This function drops the variables that have 50,000+ values out of the the 54230 available values.
 
         Returns:
-
+            cleaned data: data with the necessary columns removed.
         '''
         self.data.drop(columns = ['total_rec_late_fee', 'recoveries', 'collection_recovery_fee', 'collections_12_mths_ex_med'], inplace = True)
         return self.data
@@ -154,7 +154,7 @@ class DataFrameTransform:
         This function encompasses all the drop methods in this class into one.
 
         Returns:
-
+            cleaned data: data with the necessary columns removed.
         '''
         DataFrameTransform_data.drop_single_value_columns()
         DataFrameTransform_data.drop_too_many_null()    
@@ -166,7 +166,7 @@ class DataFrameTransform:
         This function allows you to drop rows with missing values in them.
 
         Returns:
-
+            cleaned data: data with the missing value rows removed.
         '''
         column_to_drop_rows = input("Please enter the column you would like to drop NA values from here: ")
         self.data.dropna(subset = [column_to_drop_rows], inplace = True)
@@ -179,10 +179,11 @@ class DataFrameTransform:
         Use this function when the variable is numeric and the histogram is not skewed.
 
         Returns:
-
+            total null values: should be zero now that the column has been filled with the mean.
         '''
         variable_name = input("Please enter the variable whose missing values need to be imputed using the mean here: ")
         self.data[variable_name] = self.data[variable_name].fillna(self.data[variable_name].mean())
+        return self.data[variable_name].isnull().sum()
 
     def median_for_missing_values(self):
         '''
@@ -191,53 +192,53 @@ class DataFrameTransform:
         Use this function when the data is numeric and the histogram is skewed.
 
         Returns:
-
+            total null values: should be zero now that the column has been filled with the median.
         '''
         variable_name = input("Please enter the variable whose missing values need to be imputed using the mean here: ")
         self.data[variable_name] = self.data[variable_name].fillna(self.data[variable_name].median())
-
+        return self.data[variable_name].isnull().sum()
+    
     def log_transformation(self):
         '''
-        This function carries out the log function in order to help remove skewness and displays the output as a histogram.
+        This function carries out the log function to the entire column in order to remove skewness from the variable.
 
         Returns:
-            histogram: a histogram of the distribution of the data after the log transformation has been applied.
-            skewness: the skewness value of the data after the log transformation is applied.
+            transformed column (log): the column of the new transfomed variable.
         '''
         skewed_variable = input('Please enter variable to be normalised here: ')
-        log_variable = self.data[skewed_variable].map(lambda i: np.log(i) if i > 0 else 0)
-        t = sns.histplot(log_variable, label = "Skewness: %.2f"%(log_variable.skew()))
-        t.legend()
+        self.data[skewed_variable] = self.data[skewed_variable].map(lambda i: np.log(i) if i > 0 else 0)
+        return self.data[skewed_variable]
     
     def box_cox_transformation(self):
         '''
-        This function carries out the Box-Cox transformation in order to help remove skewness and displays the output as a histogram.
+        This function carries out the Box-Cox transformation to the entire column in order to remove skewness from the variable.
 
         Returns:
-            histogram: a histogram of the distribution of the data after the Box-Cox transformation has been applied.
-            skewness: the skewness value of the data after the Box-Cox transformation is applied.
+            transformed column (box-cox): the column of the new transfomed variable.
         '''
         skewed_variable = input('Please enter variable to be normalised here: ')
         boxcox_variable = self.data[skewed_variable]
         boxcox_variable = stats.boxcox(boxcox_variable)
-        boxcox_variable = pd.Series(boxcox_variable[0], inplace = True)
-        t = sns.histplot(boxcox_variable, label = "Skewness: %.2f"%(boxcox_variable.skew()))
-        t.legend()
+        boxcox_variable = pd.Series(boxcox_variable[0])
+
+        self.data[skewed_variable] = boxcox_variable
+        return self.data[skewed_variable]
 
     def yeojohnson_transformation(self):
         '''
-        This function carries out the Yeo-Johnson transformation in order to help remove skewness and displays the output as a histogram.
+        This function carries out the Yeo-Johnson transformation to the entire column in order to remove skewness from the variable.
 
         Returns:
-            histogram: a histogram of the distribution of the data after the Yeo-Johnson transformation has been applied.
-            skewness: the skewness value of the data after the Yeo-Johnson transformation is applied.
+            transformed column (yeo-johnson): the column of the new transfomed variable.
         '''
         skewed_variable = input('Please enter variable to be normalised here: ')
+
         yeojohnson_variable = self.data[skewed_variable]
         yeojohnson_variable = stats.yeojohnson(yeojohnson_variable)
         yeojohnson_variable = pd.Series(yeojohnson_variable[0])
-        t = sns.histplot(yeojohnson_variable, label = "Skewness: %.2f"%(yeojohnson_variable.skew()))
-        t.legend()
+
+        self.data[skewed_variable] = yeojohnson_variable
+        return self.data[skewed_variable]
 
 # %%
 # Look at percentange of NULL values
@@ -289,7 +290,9 @@ print(cleaned_data_final.select_dtypes('float64').skew())
 # %%
 data_to_be_normalised = DataFrameTransform(cleaned_data_final)
 # %%
-data_to_be_normalised.log_transformation()
+check_data_skewness = Plotter(cleaned_data_final)
+# %%
+check_data_skewness.log_visualise()
 # %%
 # Log Transformation effect
 # delinq_2yrs -> 5.415423 (higher)
@@ -300,14 +303,14 @@ data_to_be_normalised.log_transformation()
 # total_rec_int -> -0.562533 (slight left skew but perfect!)
 # last_payment_amount -> 0.128038 (nearly perfect!)
 # %%
-data_to_be_normalised.box_cox_transformation()
+check_data_skewness.box_cox_visualise()
 # %%
 # Box-Cox Transformation effect
 # annual_inc -> -0.01 (perfect!)
 # total_rec_int -> 0.00 (perfect!)
 # rest of variables did not work due tot the values not being strictly +ve
 # %%
-data_to_be_normalised.yeojohnson_transformation()
+check_data_skewness.yeojohnson_visualise()
 # %%
 # Yeo-Johnson Transformation effect
 # delinq_2yrs -> 1.87 (lower) BEST
@@ -315,3 +318,24 @@ data_to_be_normalised.yeojohnson_transformation()
 # out_prncp -> 0.53 (lower) BEST but not that different from log
 # out_prncp_inv -> 0.53 (lower) BEST but same as above
 # last_payment_amount -> 0.00 BEST
+# %%
+data_to_be_normalised.log_transformation()
+# %%
+data_to_be_normalised.box_cox_transformation()
+# %%
+data_to_be_normalised.yeojohnson_transformation()
+# %%
+# Transformations to be done are:
+# delinq_2yrs -> yj
+# inq_last_6mths -> yj
+# annual_inc -> boxcox
+# out_prncp -> log
+# out_prncp_inv -> log
+# total_rec_int -> boxcox
+# last_payment_amount -> log
+# %%
+normalised_data = data_to_be_normalised.data
+# %%
+normalised_data.to_csv('normalised_data.csv', index = False)
+# %%
+loan_normalised = pd.read_csv('normalised_data.csv')
