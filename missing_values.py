@@ -138,7 +138,7 @@ class DataFrameTransform:
         Returns:
             cleaned data: data with the necessary columns removed.
         '''
-        self.data.drop(columns = ['policy_code', 'application_type'], inplace = True)
+        self.data.drop(columns = ['policy_code', 'application_type', 'payment_plan'], inplace = True)
         return self.data
     
     def drop_too_many_null(self):
@@ -279,6 +279,31 @@ class DataFrameTransform:
 
         print(f"Outliers:\n{lower_outliers[variable]}\n{upper_outliers[variable]}")
         print(f"Unique values of the outliers:\n{lower_outliers[variable].unique()}\n{upper_outliers[variable].unique()}")
+        
+    def remove_outliers_IQR(self):
+        '''
+        This function removes the rows with outliers using the inner quartile range.
+
+        Returns:
+            data: the column of the variable whose outliers have been removed. 
+        '''
+        variable = input("Please enter the variable you wish to remove outliers from here: ")
+
+        Q1 = self.data[variable].quantile(0.25)
+        Q3 = self.data[variable]. quantile(0.75)
+
+        IQR = Q3 - Q1
+        lower = Q1 - 1.5*IQR
+        upper = Q3 + 1.5*IQR
+
+        upper_array = np.where(self.data[variable] > upper)[0]
+        lower_array = np.where(self.data[variable] < lower)[0]
+
+        # Remove outliers
+        self.data.drop(index = upper_array, inplace = True)
+        self.data.drop(index = lower_array, inplace = True)
+
+        return self.data
 
 # %%
 # Look at percentange of NULL values
@@ -410,19 +435,47 @@ transform_outliers = DataFrameTransform(loan_normalised)
 # %%
 transform_outliers.IQR_for_outliers()
 # %%
-# Keep or remove outliers for the variables:
-# loan_amount -> keep
-# funded_amount -> keep
-# funded_amount_inv -> keep
-# int_rate -> keep
-# instalment -> keep
-# annual_inc -> keep
+# Outliers to be removed:
 # dti -> remove due to there only being 60 & the values being a lot higher than the Q3
-# delinq_2yrs -> keep
-# open_accounts -> transform?
-# total_accounts -> transform?
-# total_payment -> transform?
-# total_payment_inv -> transform?
-# total_rec_prncp -> transform?
 # total_rec_int -> remove due to low number
 # last_payment_amount -> remove due to low number
+# %%
+# Removing outliers
+transform_outliers.remove_outliers_IQR()
+# %%
+check_outliers_final = Plotter(transform_outliers.data)
+# %%
+check_outliers_final.boxplot_for_outliers()
+# %%
+outliers_removed = transform_outliers.data
+outliers_removed.to_csv('removed_outliers_data.csv', index = False)
+# %%
+removed_outliers= pd.read_csv('removed_outliers_data.csv')
+# %%
+# Create Correlation Matrix
+fig, ax = plt.subplots(figsize=(20,10))
+sns.heatmap(removed_outliers.corr(numeric_only=True), annot=True, cmap='coolwarm')
+plt.show()
+# %%
+# Correlation threshold is > 0.8 and < -0.2
+# May need to change threshold to be > 0.7 and < -0.1 but can come back & check
+
+# Columns to remove based on high correlation:
+# funded_amount
+# funded_amount_inv
+# instalment
+# total_payment
+# total_payment_inv
+# out_prncp
+# out_prncp_inv
+# %%
+# Drop columns
+removed_outliers.drop(columns = ['funded_amount', 'funded_amount_inv', 'instalment', 'total_payment', 'total_payment_inv', 'out_prncp', 'out_prncp_inv'], inplace = True)
+# %%
+# forgot to drop payment_plan as single value column
+removed_outliers.drop(columns = ['payment_plan'], inplace = True)
+# %%
+removed_outliers.to_csv('Completed EDA.csv', index = False)
+# %%
+completed_EDA = pd.read_csv('Completed EDA.csv')
+# %%
