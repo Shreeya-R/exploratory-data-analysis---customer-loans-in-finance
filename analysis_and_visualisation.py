@@ -103,3 +103,25 @@ print(f"The percentage of the loan paid before charged off is: {percentage_paid_
 # %%
 #############################################################################
 # Calculate projected loss
+# Use int_rate and term to calculate how much revenue the loan would have generated.
+# Check the total % of expected revenue that was lost and the increase in revenue.
+# %%
+# 1)
+# Revenue
+
+# Interest rate per month
+if charged_off['term'] == 36:
+    charged_off['term_int_rate'] = charged_off['int_rate']**3
+else:
+    charged_off['term_int_rate'] = charged_off['int_rate']**5
+print(f"Term interest rate is: \n{charged_off['term_int_rate']}")
+
+# Interest rate for entire term
+for i in mthly_int_rate_charged_off:
+    if removed_outliers['term'].values(36):
+        mthly_int_rate_charged_off**36
+    elif removed_outliers['term'] == 60:
+        mthly_int_rate_charged_off**60
+print(f"Entire term interest rate is: \n{mthly_int_rate_charged_off}")
+
+# %%
