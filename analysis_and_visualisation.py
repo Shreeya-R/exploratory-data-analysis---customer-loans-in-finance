@@ -109,19 +109,36 @@ print(f"The percentage of the loan paid before charged off is: {percentage_paid_
 # 1)
 # Revenue
 
-# Interest rate per month
-if charged_off['term'] == 36:
-    charged_off['term_int_rate'] = charged_off['int_rate']**3
-else:
-    charged_off['term_int_rate'] = charged_off['int_rate']**5
-print(f"Term interest rate is: \n{charged_off['term_int_rate']}")
+# Interest rate for term length 36
+term_36 = charged_off[charged_off['term'] == 36]
+term36_int_rate = (1 + (term_36['int_rate']/100))**3
+print(f"Term interest rate for terms length 36 are: \n{term36_int_rate}")
 
-# Interest rate for entire term
-for i in mthly_int_rate_charged_off:
-    if removed_outliers['term'].values(36):
-        mthly_int_rate_charged_off**36
-    elif removed_outliers['term'] == 60:
-        mthly_int_rate_charged_off**60
-print(f"Entire term interest rate is: \n{mthly_int_rate_charged_off}")
+# Interest rate for term length 60
+term_60 = charged_off[charged_off['term'] == 60]
+term60_int_rate = (1 + (term_60['int_rate']/100))**5
+print(f"Term interest rate for terms length 36 are: \n{term60_int_rate}")
 
+# Total loan to be paid term 36
+loan_to_be_paid36 = term_36['instalment']*term36_int_rate
+total_to_be_paid36 = loan_to_be_paid36.sum()
+print(f"Total loan that should have been paid for term 36: {total_to_be_paid36}")
+
+# Total loan to be paid term 60
+loan_to_be_paid60 = term_60['instalment']*term60_int_rate
+total_to_be_paid60 = loan_to_be_paid60.sum()
+print(f"Total loan that should have been paid for term 60: {total_to_be_paid60}")
+
+# Total payment that should have been generated
+total_charged_off_pay = total_to_be_paid60 + total_to_be_paid36
+print(f"The total that would have been paid if loans were not charged off: {total_charged_off_pay}")
+
+# 4339147.160708575 would have been paid
+# %%
+# Revenue should have been:
+revenue = total_charged_off_pay + sum_payments_charged_off
+print(f"Revenue from charged off loans should have been: {revenue}")
+
+# revenue = 43252356.48421205
+# Can't work out what is wrong
 # %%
