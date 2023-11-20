@@ -2,6 +2,7 @@
 import pandas as pd
 import seaborn as sns
 # %%
+# Load the EDA data
 removed_outliers= pd.read_csv('removed_outliers_data.csv')
 # %%
 #############################################################################
@@ -13,7 +14,7 @@ removed_outliers= pd.read_csv('removed_outliers_data.csv')
 print(f"The sum of all investor funding is: {removed_outliers['funded_amount_inv'].sum()}")
 
 # Total payment of loan recovered to investors?
-print(f"The sum of all payments receuved for investor funding: {removed_outliers['total_payment_inv'].sum()}")
+print(f"The sum of all payments received for investor funding: {removed_outliers['total_payment_inv'].sum()}")
 
 # Percentage recovered
 (removed_outliers['total_payment_inv'].sum())/(removed_outliers['funded_amount_inv'].sum())
@@ -65,3 +66,40 @@ sns.scatterplot(x = removed_outliers['funded_amount'], y = (instalment + (remove
 # %%
 #############################################################################
 # Calculating loss
+# Calculate the % of charged off loans historically and the amount paid before charged off.
+# %%
+# 1)
+# Charged off loans
+charged_off  = removed_outliers[removed_outliers['loan_status'].str.contains('Charged Off')]
+print(f"The data with charged off loan status is:\n{charged_off['loan_status']}")
+
+# Number of charged off loans
+total_charged_off = charged_off['loan_status'].count()
+print(f"The total loans charged off is: {total_charged_off}")
+
+# Percentage of loans charged off
+total_loans = removed_outliers['loan_status'].count()
+percentage_charged_off = (total_charged_off/total_loans)*100
+print(f"The percentage of loans historically charged off is: {percentage_charged_off}%")
+
+# Percentage charged off is 10.84%
+# %%
+# 2)
+# Amount paid before charged off
+
+# Sum of payments made to loans
+sum_payments_charged_off = charged_off['total_payment'].sum()
+print(f"The amount paid before charged off is: {sum_payments_charged_off}")
+
+# Loan amount for charged off loans
+loan_amount_charged_off = charged_off['loan_amount'].sum()
+print(f"The total of loans that were charged off: {loan_amount_charged_off}")
+
+# Percentage of loans paid before charged off
+percentage_paid_before_charged_off = (sum_payments_charged_off/loan_amount_charged_off)*100
+print(f"The percentage of the loan paid before charged off is: {percentage_paid_before_charged_off}%")
+
+# Percentage paid before charged off is 49.36%
+# %%
+#############################################################################
+# Calculate projected loss
