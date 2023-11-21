@@ -57,4 +57,6 @@ Go through class RDSDatabaseConnector & go through each method.
 
 ## UNFINISHED CODE
 - doc strings for RDSDatabaseConnector class in db_utils.py
+- Clean up misisng values file using a .ipynb file
+- Update details in this file 
 
