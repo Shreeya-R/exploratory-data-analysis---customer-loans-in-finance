@@ -12,6 +12,7 @@ Very short description here.
 ### Description 
 - Aim & purpose of this project
 - A rough outline of the class RDSDatabaseConnector
+
 ### What I've Learned
 1. How to filter columns with missing values
 - Median as missing value: when variable is numerical & skewed
@@ -59,4 +60,39 @@ Go through class RDSDatabaseConnector & go through each method.
 - doc strings for RDSDatabaseConnector class in db_utils.py
 - Clean up misisng values file using a .ipynb file
 - Update details in this file 
+
+# Project Outline
+1. Extracting Data from the Cloud
+2. Exploratory Data Analysis (EDA)
+3. Analysis and Visualisation
+
+## 1. Extracting Data from the Cloud
+In order to begin the data analysis, I first needed to extract and clean the data. To do this, I created a class called __RDSDatabaseConnector__ in a new file, db_utils.py, which has the sole purpose of extracting the data. In total, there are 5 different methods in this class namely:
+
+1. init
+2. load_credentials
+3. initialise_SQLAlchemy
+4. data_to_Pandas_df
+5. df_to_csv
+
+Below is a brief outline on each method. Further information on the RDSDatabaseConnector class can be found using help(RDSDatabaseConnector) after the class has been imported to your computer.
+
+### 1. init
+This magic method simply initialises the instance attributes with the values that have be passed as arguments. In the RDSDatabaseConnector class, there is only one attribute initialised in this method, which is 'self.credentials'. 
+
+### 2. load_credentials
+The purpose of this method is to load the credentials yaml file so that this information can later be used to connect to the RDS. I had to create a credentials yaml file with the necessary information and import the yaml Python package prior to this step.
+
+### 3. initialise_SQLAlchemy
+Now that the the credentials had been loaded in Python, the next step was to use the information to connect to the SQLAlchemy engine and load the data. In order to create an SQLAlchemy, the engine package first needed to be imported from sqlalchemy.
+
+### 4. data_to_Pandas_df
+Finally, the required data had been extracted. However the format of the data at this point was not ideal for data analysis, hence a method was created to convert this data to a pandas dataframe. This resulted in the data being encompassed in a variable name called 'pandas_df'.
+
+### 5. df_to_csv
+Unfortunately, a pandas dataframe can only be viewed in Python and so is not easily accessible after each coding session. To solve this inconvenience, I converted the data to a csv, which means that the data can be saved locally on my computer and can also be accessible to any peers that I wish to share the raw data with. 
+
+## 2. Exploratory Data Analysis (EDA)
+
+## 3. Analysis and Visualisation
 
