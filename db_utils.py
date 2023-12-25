@@ -8,9 +8,7 @@ class RDSDatabaseConnector:
 
     Attributes:
         credentials (dict): these are the credentials of the sqlalchemy engine represented as a dictionary.
-
     '''
-
     def __init__(self, credentials):
         '''
         See help(RDSDatabaseConnector) for accurate signature
@@ -20,10 +18,7 @@ class RDSDatabaseConnector:
     def load_credentials(self):
         '''
         This function is used to load the credentials.yaml file.
-
-        Args:
             
-
         Returns:
             dict: the dictionary representation of the credentials.
         '''
@@ -57,6 +52,7 @@ class RDSDatabaseConnector:
         '''
         pandas_df = pd.read_sql_table('loan_payments', self.initialise_SQLAlchemy())
         return pandas_df
+    
     def df_to_csv(self):
         '''
         This function converts as Pandas DataFrame to a csv file, which is saved to your local machine.
@@ -67,15 +63,13 @@ class RDSDatabaseConnector:
         csv_file = self.data_to_Pandas_df().to_csv('loan_payment', index=False)
         return csv_file
 # %%
-#if __name__ == 'main':
-new_rds = RDSDatabaseConnector('credentials.yaml')
-new_rds
+if __name__ == 'main':
+    new_rds = RDSDatabaseConnector('credentials.yaml')
+    new_rds
 # %%
+# Check each method works correctly by executing them with the newly created RDSDatabaseConnector instance new_rds.
 # new_rds.load_credentials()
-# %%
 # new_rds.initialise_SQLAlchemy()
-# %%
 # new_rds.data_to_Pandas_df()
-# %%
 # new_rds.df_to_csv()
 # %%
