@@ -62,9 +62,9 @@ Go through class RDSDatabaseConnector & go through each method.
 - Update details in this file 
 
 # Project Outline
-1. Extracting Data from the Cloud
-2. Exploratory Data Analysis (EDA)
-3. Analysis and Visualisation
+1. [Extracting Data from the Cloud](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance?tab=readme-ov-file#1-extracting-data-from-the-cloud)
+2. [Exploratory Data Analysis (EDA)](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance?tab=readme-ov-file#2-exploratory-data-analysis-eda)
+3. [Analysis and Visualisation](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance?tab=readme-ov-file#3-analysis-and-visualisation)
 
 ## 1. Extracting Data from the Cloud
 In order to begin the data analysis, I first needed to extract and clean the data. To do this, I created a class called __RDSDatabaseConnector__ in a new file, db_utils.py, which has the sole purpose of extracting the data. Other than pandas, all other necessary packages for this class are already coded to be imported within the method that they are required.
