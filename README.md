@@ -67,7 +67,17 @@ Go through class RDSDatabaseConnector & go through each method.
 3. Analysis and Visualisation
 
 ## 1. Extracting Data from the Cloud
-In order to begin the data analysis, I first needed to extract and clean the data. To do this, I created a class called __RDSDatabaseConnector__ in a new file, db_utils.py, which has the sole purpose of extracting the data. In total, there are 5 different methods in this class namely:
+In order to begin the data analysis, I first needed to extract and clean the data. To do this, I created a class called __RDSDatabaseConnector__ in a new file, db_utils.py, which has the sole purpose of extracting the data. Other than pandas, all other necessary packages for this class are already coded to be imported within the method that they are required.
+
+To create an instance for this class and use it's methods, one needs to first create a yaml file, which contains the credentials of the RDS database that you want to connect to. Make sure that the credentials contain the following information:
+
+- RDS_HOST
+- RDS_PASSWORD
+- RDS_USER
+- RDS_DATABASE
+- RDS_PORT
+
+There are a total of 5 different methods contained in the __RDSDatabaseConnector__ class:
 
 1. init
 2. load_credentials
@@ -93,6 +103,7 @@ Finally, the required data had been extracted. However the format of the data at
 Unfortunately, a pandas dataframe can only be viewed in Python and so is not easily accessible after each coding session. To solve this inconvenience, I converted the data to a csv, which means that the data can be saved locally on my computer and can also be accessible to any peers that I wish to share the raw data with. 
 
 ## 2. Exploratory Data Analysis (EDA)
+
 
 ## 3. Analysis and Visualisation
 
