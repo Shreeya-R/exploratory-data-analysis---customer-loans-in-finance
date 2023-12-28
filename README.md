@@ -109,31 +109,76 @@ To carry out the EDA of this financial dataset, I created the following 4 classe
 3. DataFrameTransform
 4. Plotter
 
-Below, I have explained each class in further detai. To see more information about each of these classes and their methods, see the docstrings for them through help(*insert class name here*).
+Below, I have explained each class in further detail. To see more information about each of these classes and their methods, see the docstrings for them through help(*insert class name here*).
 
 ### 1. DataTransform
-#### Usage
 The purpose of this class is to alter columns so that they are in their correct format, which involves changing the datatypes of the variables. Here is a list of the different datatypes that the object variables can be converted to in this class:
 - Datetime
 - Boolean
 - Category
 - Integer
 
-In addition, the class provides the option to apply all the conversions in one go using the __all_transformations__ method.
+In addition, the class provides the option to apply all the conversions in one go using the 'all_transformations' method.
 
-#### Installation
 To install this class:
 ![DataTransform Class](class_installation_images/DataTransform_class.png)
 
 ### 2. DataFrameInfo
+__DataFrameInfo__ class contains methods to generate useful information about the data, in particular statistical values and other properties of the data. 
 
-#### Installation
+The statistical calculations included in this class are:
+- Mean
+- Median
+- Mode
+- Standard deviation
+- Skew
+
+Furthermore, this class contains methods for:
+- Number of distinct values in the categorical columns
+- Shape of the dataframe
+- Percentage of null values in the columns
+
+Overall, the __DataFrameInfo__ class gives an insight the data, which will be very useful for cleaning and removing data in the next step of this project.
+
 To install this class:
 ![DataFrameInfo Class](class_installation_images/DataFrameInfo_class.png)
 
 ### 3. DataFrameTransform
+Removing unnecessary data and inputing data for missing values is a very important step in EDA. Fortunately, I already explored the data in the previous __DataFrameInfo__ class, so now the purpose of the __DataFrameTransform__ class is to apply the changes that need to be made.
 
-#### Installation
+There are 3 types of methods contained in this class:
+1. Dropping and inputing values
+2. Resolving Skew
+3. Finding and removing outliers
+
+#### 1. Dropping and Inputing Values
+In these methods, values haves been dropped or inputted based on their column being null, missing, zero or a single value column. 
+
+All inputed values are based either on the mean or median of the column. To help decide whether to input the mean or median, I followed this guideline:
+- __Median__, when variable is numerical or skewed.
+- __Mean__, when variable is numerical and not skewed. 
+- __Mode__, when variable is numerical or categorical.
+
+I did not have to use the mode method due to the categorical columns having a low amount of missing values, so it was more convenient to remove the row they appeared in, especially as the dataset is large.
+
+#### 2. Resolving Skew
+Prior to resolving skew, I needed to find out which variables were skewed through creating histograms using the __Plotter__ class. See more about this method in the __Plotter__ class section below.
+
+I used 3 different methods to determine how to resolve the skewness of variable:
+- __Log__ 
+- __Box-Cox__ 
+- __Yeojohnson__
+
+See more on the skewness and deciding the best method in the '---------------------------------' notebook.
+
+#### 3. Finding and Removing Outliers
+I chose to use the upper fence and lower fence method with the IQR (inter quartile range) to classify outliers. To do so I used the following formulas:
+- IQR = Q3 - Q1
+- Upper Fence = Q3 + (1.5 * IQR)
+- Lower Fence = Q1 - (1.5 * IQR)
+
+Any values that lie above the upper fence or below the lower fence have been classified as outliers and hence were removed using the method in the __DataFrameTransform__ class.
+
 To install this class:
 ![DataFrameTransform Class](class_installation_images/DataFrameTransform_class.png)
 
