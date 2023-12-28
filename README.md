@@ -60,6 +60,7 @@ The purpose of this class is to alter columns so that they are in their correct 
 
 In addition, the class provides the option to apply all the conversions in one go using the 'all_transformations' method.
 
+#### Installation
 To install this class:
 ![DataTransform Class](class_installation_images/DataTransform_class.png)
 
@@ -80,6 +81,7 @@ Furthermore, this class contains methods for:
 
 Overall, the __DataFrameInfo__ class gives an insight the data, which will be very useful for cleaning and removing data in the next step of this project.
 
+#### Installation
 To install this class:
 ![DataFrameInfo Class](class_installation_images/DataFrameInfo_class.png)
 
@@ -119,6 +121,7 @@ I chose to use the upper fence and lower fence method with the IQR (inter quarti
 
 Any values that lie above the upper fence or below the lower fence have been classified as outliers and hence were removed using the method in the __DataFrameTransform__ class.
 
+#### Installation
 To install this class:
 ![DataFrameTransform Class](class_installation_images/DataFrameTransform_class.png)
 
@@ -144,13 +147,21 @@ There are 3 methods for correcting skew and it is useful to plot the variables a
 
 #### 4. Find Outliers
 Like with normality, sometimes simply using the upper fence and lower fence can provide inaccurate information on the presence of outliers. So, seeing a visual of the spread of data through a boxplot is ideal to check that the outliers found truly are outliers and do not follow the trend like the rest of the data.
+![Box Plot for Outliers](boxplot_outliers.png)
 
+#### Installation
 To install this class:
 ![Plotter Class](class_installation_images/Plotter_class.png)
 
 ## 3. Analysis and Visualisation
+Now that the data has been cleaned and the exploratory data analysis is over. The final part of this project involves analysis and visualisation, which provides deeper insights to the data with answers to useful questions. In total, there are 5 insights to take away from this section:
+1. What is the current state of the loans?
+2. What is the percentage of loans lost to the company?
+3. What is the projected loss?
+4. What is the possible loss?
+5. What are the possible indicators of loss?
 
-
+The above questions have been explored, answered and visualised in the __analysis_visualisation.ipynb__ notebook.
 
 
 
