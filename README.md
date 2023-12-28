@@ -123,8 +123,28 @@ To install this class:
 ![DataFrameTransform Class](class_installation_images/DataFrameTransform_class.png)
 
 ### 4. Plotter
+Any visualisations required during the EDA process are all contained within the __Plotter__ class. This includes the graphical representations that aid in deciding changes to be made to the data in the __DataFrameTransform__ class.
 
-#### Installation
+The different purposes of the visualisations provided by the __Plotter__ class are to:
+1. Check normality
+2. Visualise missing values
+3. Correct skewness
+4. Find outliers
+
+#### 1. Check Normality
+Identifying how close a variable follows a normal distrbution can easily be determined by visualising. This class provides 2 graphical representations to visualise normality, which is a histogram and a Q-Q plot. It is not suffficient to simply look at the statistical calcualtion of skew as the value may indicate a normal distribution, but the graphical representation can provide a very different story. Therefore, it is important to carry out the visualisation of skew through histograms and Q-Q plots.
+
+#### 2. Visualise Missing Values
+When looking for missing values, it is good to create a matrix to find the variables with missing values as this gives you an overview of all variables and their missing values. This visualisation can also be used once values have been inputed in place iof the missing values to see if the transformation worked and any missing values that remain.
+
+#### 3. Correct Skewness
+Skewness indicates that a variable does not follow a normal distribution. This is not ideal for data analysis as this can lead to biased models and inaccurate results, hence and skewed data should be normalised to provide optimal results.
+
+There are 3 methods for correcting skew and it is useful to plot the variables after a potential normilisation method has been performed so that one can compare the variable to it's original skewed version. Again, a more in depth view on these 3 methods has been shown in the '---------------------------------' notebook.
+
+#### 4. Find Outliers
+Like with normality, sometimes simply using the upper fence and lower fence can provide inaccurate information on the presence of outliers. So, seeing a visual of the spread of data through a boxplot is ideal to check that the outliers found truly are outliers and do not follow the trend like the rest of the data.
+
 To install this class:
 ![Plotter Class](class_installation_images/Plotter_class.png)
 
