@@ -123,25 +123,25 @@ In addition, the class provides the option to apply all the conversions in one g
 
 #### Installation
 To install this class:
-![DataTransform Class](DataTransform_class.png)
+![DataTransform Class](class_installation_images/DataTransform_class.png)
 
 ### 2. DataFrameInfo
 
 #### Installation
 To install this class:
-![DataFrameInfo Class](DataFrameInfo_class.png)
+![DataFrameInfo Class](class_installation_images/DataFrameInfo_class.png)
 
 ### 3. DataFrameTransform
 
 #### Installation
 To install this class:
-![DataFrameTransform Class](DataFrameTransform_class.png)
+![DataFrameTransform Class](class_installation_images/DataFrameTransform_class.png)
 
 ### 4. Plotter
 
 #### Installation
 To install this class:
-![Plotter Class](Plotter_class.png)
+![Plotter Class](class_installation_images/Plotter_class.png)
 
 ## 3. Analysis and Visualisation
 
