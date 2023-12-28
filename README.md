@@ -70,7 +70,6 @@ Go through class RDSDatabaseConnector & go through each method.
 In order to begin the data analysis, I first needed to extract and clean the data. To do this, I created a class called __RDSDatabaseConnector__ in a new file, db_utils.py, which has the sole purpose of extracting the data. Other than pandas, all other necessary packages for this class are already coded to be imported within the method that they are required.
 
 To create an instance for this class and use it's methods, one needs to first create a yaml file, which contains the credentials of the RDS database that you want to connect to. Make sure that the credentials contain the following information:
-
 - RDS_HOST
 - RDS_PASSWORD
 - RDS_USER
@@ -78,7 +77,6 @@ To create an instance for this class and use it's methods, one needs to first cr
 - RDS_PORT
 
 There are a total of 5 different methods contained in the __RDSDatabaseConnector__ class:
-
 1. init
 2. load_credentials
 3. initialise_SQLAlchemy
@@ -103,7 +101,47 @@ Finally, the required data had been extracted. However the format of the data at
 Unfortunately, a pandas dataframe can only be viewed in Python and so is not easily accessible after each coding session. To solve this inconvenience, I converted the data to a csv, which means that the data can be saved locally on my computer and can also be accessible to any peers that I wish to share the raw data with. 
 
 ## 2. Exploratory Data Analysis (EDA)
+Prior to carrying out EDA, I familiarised myself with the data, which can be seen in the 'familiarise_with_data.ipynb' file.
 
+To carry out the EDA of this financial dataset, I created the following 4 classes:
+1. DataTransform
+2. DataFrameInfo
+3. DataFrameTransform
+4. Plotter
+
+Below, I have explained each class in further detai. To see more information about each of these classes and their methods, see the docstrings for them through help(*insert class name here*).
+
+### 1. DataTransform
+#### Usage
+The purpose of this class is to alter columns so that they are in their correct format, which involves changing the datatypes of the variables. Here is a list of the different datatypes that the object variables can be converted to in this class:
+- Datetime
+- Boolean
+- Category
+- Integer
+
+In addition, the class provides the option to apply all the conversions in one go using the __all_transformations__ method.
+
+#### Installation
+To install this class:
+![DataTransform Class](DataTransform_class.png)
+
+### 2. DataFrameInfo
+
+#### Installation
+To install this class:
+![DataFrameInfo Class](DataFrameInfo_class.png)
+
+### 3. DataFrameTransform
+
+#### Installation
+To install this class:
+![DataFrameTransform Class](DataFrameTransform_class.png)
+
+### 4. Plotter
+
+#### Installation
+To install this class:
+![Plotter Class](Plotter_class.png)
 
 ## 3. Analysis and Visualisation
 
