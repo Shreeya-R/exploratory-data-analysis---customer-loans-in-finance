@@ -1,5 +1,5 @@
 # EDA on Customer Loans in Finance
-Very short description here.
+How to 
 
 # Project Outline
 1. [Extracting Data from the Cloud](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance?tab=readme-ov-file#1-extracting-data-from-the-cloud)
@@ -41,7 +41,7 @@ Finally, the required data had been extracted. However the format of the data at
 Unfortunately, a pandas dataframe can only be viewed in Python and so is not easily accessible after each coding session. To solve this inconvenience, I converted the data to a csv, which means that the data can be saved locally on my computer and can also be accessible to any peers that I wish to share the raw data with. 
 
 ## 2. Exploratory Data Analysis (EDA)
-Prior to carrying out EDA, I familiarised myself with the data, which can be seen in the 'familiarise_with_data.ipynb' file.
+Prior to carrying out EDA, I familiarised myself with the data, which can be seen in the [familiarise_with_data.ipynb](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance/blob/main/familiarise_with_data.ipynb) notebook.
 
 To carry out the EDA of this financial dataset, I created the following 4 classes:
 1. DataTransform
@@ -111,7 +111,7 @@ I used 3 different methods to determine how to resolve the skewness of variable:
 - __Box-Cox__ 
 - __Yeojohnson__
 
-See more on the skewness and deciding the best method in the '---------------------------------' notebook.
+See more on the skewness and deciding the best method in the [plotter_dataframetransform.ipynb](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance/blob/main/plotter_dataframetransform.ipynb) notebook.
 
 #### 3. Finding and Removing Outliers
 I chose to use the upper fence and lower fence method with the IQR (inter quartile range) to classify outliers. To do so I used the following formulas:
@@ -143,7 +143,7 @@ When looking for missing values, it is good to create a matrix to find the varia
 #### 3. Correct Skewness
 Skewness indicates that a variable does not follow a normal distribution. This is not ideal for data analysis as this can lead to biased models and inaccurate results, hence and skewed data should be normalised to provide optimal results.
 
-There are 3 methods for correcting skew and it is useful to plot the variables after a potential normilisation method has been performed so that one can compare the variable to it's original skewed version. Again, a more in depth view on these 3 methods has been shown in the '---------------------------------' notebook.
+There are 3 methods for correcting skew and it is useful to plot the variables after a potential normilisation method has been performed so that one can compare the variable to it's original skewed version. Again, a more in depth view on these 3 methods has been shown in the [plotter_dataframetransform.ipynb](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance/blob/main/plotter_dataframetransform.ipynb) notebook.
 
 #### 4. Find Outliers
 Like with normality, sometimes simply using the upper fence and lower fence can provide inaccurate information on the presence of outliers. So, seeing a visual of the spread of data through a boxplot is ideal to check that the outliers found truly are outliers and do not follow the trend like the rest of the data.
@@ -161,10 +161,7 @@ Now that the data has been cleaned and the exploratory data analysis is over. Th
 4. What is the possible loss?
 5. What are the possible indicators of loss?
 
-The above questions have been explored, answered and visualised in the __analysis_visualisation.ipynb__ notebook.
-
-
-
+The above questions have been explored, answered and visualised in the [analysis_visualisation.ipynb](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance/blob/main/analysis_visualisation.ipynb) notebook.
 
 
 
