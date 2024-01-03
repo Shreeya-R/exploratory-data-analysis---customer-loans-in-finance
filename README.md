@@ -1,5 +1,5 @@
 # EDA on Customer Loans in Finance
-How to 
+Loans can be beneficial for individuals, business operations and for the growth of the overall money supply in an economy. Given the importance of loans for both business and economic development, it is essential that loans are provided to individuals that will repay their loans in full. To effectively create an informed decision on which loans should or should not be approved, this project investigates loan data, performs exploratory data analysis and visualises the data to provide helpful insights.
 
 # Project Outline
 1. [Extracting Data from the Cloud](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance?tab=readme-ov-file#1-extracting-data-from-the-cloud)
@@ -41,7 +41,7 @@ Finally, the required data had been extracted. However the format of the data at
 Unfortunately, a pandas dataframe can only be viewed in Python and so is not easily accessible after each coding session. To solve this inconvenience, I converted the data to a csv, which means that the data can be saved locally on my computer and can also be accessible to any peers that I wish to share the raw data with. 
 
 ## 2. Exploratory Data Analysis (EDA)
-Prior to carrying out EDA, I familiarised myself with the data, which can be seen in the [familiarise_with_data.ipynb](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance/blob/main/familiarise_with_data.ipynb) notebook.
+Prior to carrying out EDA, I familiarised myself with the data, which can be seen in the [familiarise_with_data.ipynb](https://github.com/Shreeya-R/exploratory-data-analysis---customer-loans-in-finance/blob/6488d21a46412a42aba677cf7a0348b06a2f8e29/Notebooks%20for%20Explanations/familiarise_with_data.ipynb) notebook.
 
 To carry out the EDA of this financial dataset, I created the following 4 classes:
 1. DataTransform
@@ -111,7 +111,7 @@ I used 3 different methods to determine how to resolve the skewness of variable:
 - __Box-Cox__ 
 - __Yeojohnson__
 
-See more on the skewness and deciding the best method in the [plotter_dataframetransform.ipynb](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance/blob/main/plotter_dataframetransform.ipynb) notebook.
+See more on the skewness and deciding the best method in the [plotter_dataframetransform.ipynb](https://github.com/Shreeya-R/exploratory-data-analysis---customer-loans-in-finance/blob/6488d21a46412a42aba677cf7a0348b06a2f8e29/Notebooks%20for%20Explanations/plotter_dataframetransform.ipynb) notebook.
 
 #### 3. Finding and Removing Outliers
 I chose to use the upper fence and lower fence method with the IQR (inter quartile range) to classify outliers. To do so I used the following formulas:
@@ -143,11 +143,11 @@ When looking for missing values, it is good to create a matrix to find the varia
 #### 3. Correct Skewness
 Skewness indicates that a variable does not follow a normal distribution. This is not ideal for data analysis as this can lead to biased models and inaccurate results, hence and skewed data should be normalised to provide optimal results.
 
-There are 3 methods for correcting skew and it is useful to plot the variables after a potential normilisation method has been performed so that one can compare the variable to it's original skewed version. Again, a more in depth view on these 3 methods has been shown in the [plotter_dataframetransform.ipynb](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance/blob/main/plotter_dataframetransform.ipynb) notebook.
+There are 3 methods for correcting skew and it is useful to plot the variables after a potential normilisation method has been performed so that one can compare the variable to it's original skewed version. Again, a more in depth view on these 3 methods has been shown in the [plotter_dataframetransform.ipynb](https://github.com/Shreeya-R/exploratory-data-analysis---customer-loans-in-finance/blob/6488d21a46412a42aba677cf7a0348b06a2f8e29/Notebooks%20for%20Explanations/plotter_dataframetransform.ipynb) notebook.
 
 #### 4. Find Outliers
 Like with normality, sometimes simply using the upper fence and lower fence can provide inaccurate information on the presence of outliers. So, seeing a visual of the spread of data through a boxplot is ideal to check that the outliers found truly are outliers and do not follow the trend like the rest of the data.
-![Box Plot for Outliers](boxplot_outliers.png)
+![Box Plot for Outliers](Visualisations/boxplot_outliers.png)
 
 #### Installation
 To install this class:
@@ -161,30 +161,8 @@ Now that the data has been cleaned and the exploratory data analysis is over. Th
 4. What is the possible loss?
 5. What are the possible indicators of loss?
 
-The above questions have been explored, answered and visualised in the [analysis_visualisation.ipynb](https://github.com/shhrreeyyaa/exploratory-data-analysis---customer-loans-in-finance/blob/main/analysis_visualisation.ipynb) notebook.
+The above questions have been explored, answered and visualised in the [analysis_visualisation.ipynb](https://github.com/Shreeya-R/exploratory-data-analysis---customer-loans-in-finance/blob/6488d21a46412a42aba677cf7a0348b06a2f8e29/Notebooks%20for%20Explanations/analysis_visualisation.ipynb) notebook.
 
-
-
-# EDA on Customer Loans in Finance
-Very short description here.
-
-## Contents
-1. The Project
-2. Installation Instructions
-3. Usage Instructions
-4. File Structure of the Project
-5. License Information
-
-## 1. The Project
-### Description 
-- Aim & purpose of this project
-- A rough outline of the class RDSDatabaseConnector
-
-### What I've Learned
-1. How to filter columns with missing values
-- Median as missing value: when variable is numerical & skewed
-- Mean as missing value: when variable is numerical & not skewed
-- Mode as missing value: when variable is numerical or categorical?
 2. Practically applying the knowledge
 - funded_amount: impute the median for missing values due to histogram & qqplot indicating skewness to the right.
 - int_rate: impute the median for missing values due to histogram & qqplot indicating skewness to the right.
@@ -192,38 +170,3 @@ Very short description here.
 - last_payment_date: remove missing value rows due to it not being normally distributed & percentage of missing data being very low (0.1346%)
 - last_credit_pull_date: remove missing value rows due to it not being close to a normal distribution & percentage of missing data being extremely low (0.0129%)
 
-## 2. Installation Instructions
-- import yaml
-- import pandas etc if not included in code of the class
-- import db_utils.py 
-
-## 3. Usage Instructions
-Go through class RDSDatabaseConnector & go through each method.
-- load_credentials (loads the credentials.yaml file to give the dictionary for credentials)
-- initialise_SQLAlchemy (initialises the SQLAlchemy engine)
-
-## 4. File Structure of the Project
-- db_utils.py 
-    - This connects to the RDS
-    - Converts data to pandas dataframe
-    - Converts pandas dataframe to csv
-- familiarise_with_data.py
-    - Loads loan_payment 
-    - Looks at familiarises self with data
-- DataTransform_class.py
-    - Converts columns to correct data format
-    - Contains the class DataTransform, and corresponding methods
-- DataFrameInfo.py
-    - Extracts information from the DataFrame and it's columns
-    - Contains methods to generate useful information about the DataFrame
-- missing_values.py
-    - Deals with missing data values
-    - Creates 2 classes to deal with missing values
-    - impute mean when data is numeric & not skewed
-    - impute median when data is numeric & skewed
-    - impute mode when data i sstring(object) or numeric
-
-## UNFINISHED CODE
-- doc strings for RDSDatabaseConnector class in db_utils.py
-- Clean up misisng values file using a .ipynb file
-- Update details in this file 
