@@ -162,11 +162,3 @@ Now that the data has been cleaned and the exploratory data analysis is over. Th
 5. What are the possible indicators of loss?
 
 The above questions have been explored, answered and visualised in the [analysis_visualisation.ipynb](https://github.com/Shreeya-R/exploratory-data-analysis---customer-loans-in-finance/blob/6488d21a46412a42aba677cf7a0348b06a2f8e29/Notebooks%20for%20Explanations/analysis_visualisation.ipynb) notebook.
-
-2. Practically applying the knowledge
-- funded_amount: impute the median for missing values due to histogram & qqplot indicating skewness to the right.
-- int_rate: impute the median for missing values due to histogram & qqplot indicating skewness to the right.
-- employment_length: impute the median/mode due to skewness & the distribution not being close to that of a normal one
-- last_payment_date: remove missing value rows due to it not being normally distributed & percentage of missing data being very low (0.1346%)
-- last_credit_pull_date: remove missing value rows due to it not being close to a normal distribution & percentage of missing data being extremely low (0.0129%)
-
